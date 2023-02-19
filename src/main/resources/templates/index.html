@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Job application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all" href="/images/css/stsm.css" th:href="@{/images/css/stsm.css}"/>
+
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', {'packages':['corechart']});
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart() {
+
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Topping');
+            data.addColumn('number', 'Slices');
+            data.addRows([[${jobOfferData.chartData}]]);
+
+            // Set chart options
+            var options = {'title':'First 10 subject with the most frequent beginning of contact ',
+                'width':600,
+                'height':400};
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
+
+</head>
+<body>
+<h1 style="font-size: 50px; text-align: center; font-family: 'Lucida Handwriting', cursive;">Job management application</h1>
+<div style="text-align: center;">
+    <img src="/images/img.png" />
+</div>
+
+<p style="font-size: 20px; font-family: Arial, sans-serif;">The displayed data monitors job offers received through LinkedIn since January 1, 2020. These data may be used for statistical purposes that can be beneficial for Java developers or HR professionals.</p>
+
+<h2 style="font-size: 20px; justify-content: center;">Statistical data</h2>
+
+<table style="border-collapse: collapse; width: 100%; background-color: azure; color: black; border: 2px solid black;">
+    <colgroup>
+        <col style="border-right: 2px solid black;">
+        <col>
+    </colgroup>
+    <tr>
+        <td><b>Total number of received job offers:</b></td>
+        <td th:text="${jobOfferData.sumJobOffer}" style="border-top: 2px solid black;"></td>
+    </tr>
+    <tr style="border-top: 2px solid black; border-bottom: 2px solid black;">
+        <td><b>Number of companies</b></td>
+        <td th:text="${jobOfferData.companyCount}"></td>
+    </tr>
+    <tr style="border-top: 2px solid black; border-bottom: 2px solid black;">
+        <td><b>Number of recruitment agencies:</b></td>
+        <td th:text="${jobOfferData.agencyCount}"></td>
+    </tr>
+    <tr style="border-top: 2px solid black; border-bottom: 2px solid black;">
+        <td><b>Number of HR ICO:</b></td>
+        <td th:text="${jobOfferData.hrIcoCount}"></td>
+    </tr>
+    <tr style="border-top: 2px solid black; border-bottom: 2px solid black;">
+        <td><b>Number of bodyshop recruitment agencies:</b></td>
+        <td th:text="${jobOfferData.bodyshopAgencyCount}"></td>
+    </tr>
+    <tr style="border-top: 2px solid black; border-bottom: 2px solid black;">
+        <td><b>Names of bodyshop recruitment agencies:</b></td>
+        <td th:text="${jobOfferData.bodyshopNames}"></td>
+    </tr>
+    <tr style="border-top: 2px solid black; border-bottom: 2px solid black;">
+        <td><b>Names of companies:</b></td>
+        <td th:text="${jobOfferData.companyNames}"></td>
+    </tr>
+    <tr style="border-top: 2px solid black;">
+        <td><b>Names of recruitment agencies:</b></td>
+        <td th:text="${jobOfferData.agencyNames}"></td>
+    </tr>
+</table>
+
+<div style="display: flex; justify-content: center;">
+    <div id="chart_div"></div>
+</div>
+</body>
+</html>
+
