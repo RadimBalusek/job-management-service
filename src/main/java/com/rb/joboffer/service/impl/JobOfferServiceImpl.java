@@ -1,6 +1,6 @@
 package com.rb.joboffer.service.impl;
 
-import com.rb.joboffer.entities.JobOfferData;
+import com.rb.joboffer.model.JobOfferData;
 import com.rb.joboffer.repository.JobOfferRepository;
 import com.rb.joboffer.service.JobOfferService;
 import org.springframework.beans.factory.annotation.Autowired;

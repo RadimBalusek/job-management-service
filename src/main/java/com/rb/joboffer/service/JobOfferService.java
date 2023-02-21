@@ -1,9 +1,6 @@
 package com.rb.joboffer.service;
 
-import com.rb.joboffer.entities.JobOfferData;
-
-import java.util.List;
-import java.util.Map;
+import com.rb.joboffer.model.JobOfferData;
 
 public interface JobOfferService {
 

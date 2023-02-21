@@ -14,13 +14,17 @@ public class JobOfferRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public void insertIntoTable(String name, String contact_date, String company, String foreign, String company_type, String company_offer, String job_offer_description) {
+    public void insertIntoJobOfferTable(String name, String contact_date, String company, String foreign, String company_type, String company_offer, String job_offer_description) {
         jdbcTemplate.update("INSERT INTO job_offer(name_, contact_date_, company_, foreign_, company_type_, company_offer_, job_offer_description_) VALUES (?,?,?,?,?,?,?)", name, contact_date, company, foreign, company_type, company_offer, job_offer_description);
     }
 
+    public void insertIntoCompanyOfferTable(String company_name, String daily_rate, String short_description, String contact, String address, String location, String atmoskop_description, String company_type, String popularity ) {
+        jdbcTemplate.update("INSERT INTO company_offer(company_name_, daily_rate_, short_description_, contact_, address_, location_, atmoskop_description_, company_type_, popularity_) VALUES (?,?,?,?,?,?,?,?,?)", company_name, daily_rate, short_description, contact, address, location, atmoskop_description, company_type, popularity);
+    }
 
     public Integer getSumJobOffer() {
-        String sql = "SELECT COUNT(*) FROM job_offer";
+        // last row is empty reason for count(*)-1
+        String sql = "SELECT COUNT(*) -1  FROM job_offer";
         return jdbcTemplate.queryForObject(sql, Integer.class);
     }
 

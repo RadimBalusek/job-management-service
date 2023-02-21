@@ -1,4 +1,4 @@
-package com.rb.joboffer.entities;
+package com.rb.joboffer.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
